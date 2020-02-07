@@ -1,20 +1,22 @@
 import React from 'react';
+import AppConsumer from '../contexts/app/AppConsumer';
 
-function Find(props) {
-  const showFind = () => {
-    props.findContext.toggleShowFind();
-  };
-
+function Find() {
   return (
-    <>
-      <button onClick={showFind}>Click Me to show find form</button>
-      {props.findContext.showFind && (
+    <AppConsumer>
+      {({ findContext }) => (
         <>
-          <label htmlFor="maInput">Find form input</label>
-          <input id="maInput" />
+          <button onClick={() => findContext.toggleShowFind()}>
+            Click Me to show create form
+          </button>
+          {findContext.showFind && (
+            <>
+              <a href="http://localhost">Linky boi</a>
+            </>
+          )}
         </>
       )}
-    </>
+    </AppConsumer>
   );
 }
 

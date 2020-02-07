@@ -1,22 +1,25 @@
 import React from 'react';
 import Find from './Find';
+import AppConsumer from '../contexts/app/AppConsumer';
 
-function CreateForm(props) {
-  const showCreate = () => {
-    props.createContext.toggleShowCreate();
-  };
-
+function CreateForm() {
   return (
-    <>
-      <button onClick={showCreate}>Click Me to show create form</button>
-      {props.createContext.showCreate && (
+    <AppConsumer>
+      {({ createContext }) => (
         <>
-          <label htmlFor="maInput">Create Form Input</label>
-          <input id="maInput" />
-          <Find {...props} />
+          <button onClick={() => createContext.toggleShowCreate()}>
+            Click Me to show create form
+          </button>
+          {createContext.showCreate && (
+            <>
+              <label htmlFor="maInput">Create Form Input</label>
+              <input id="maInput" />
+              <Find />
+            </>
+          )}
         </>
       )}
-    </>
+    </AppConsumer>
   );
 }
 
