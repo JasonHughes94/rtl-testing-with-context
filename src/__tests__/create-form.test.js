@@ -31,3 +31,20 @@ test('Click create form calls toggleShowCreate one time', () => {
   fireEvent.click(createFormButton);
   expect(mockToggleShowCreate).toHaveBeenCalledTimes(1);
 });
+
+test('showCreate set to true renders the label and input', () => {
+  const mockToggleShowCreate = jest.fn();
+  const mockShowCreate = true;
+
+  const { container } = render(
+    <MockAppProvider
+      toggleShowCreate={mockToggleShowCreate}
+      showCreate={mockShowCreate}
+    >
+      <CreateForm />
+    </MockAppProvider>
+  );
+
+  expect(container.querySelector('label')).toBeVisible();
+  expect(container.querySelector('#maInput')).toBeVisible();
+});
